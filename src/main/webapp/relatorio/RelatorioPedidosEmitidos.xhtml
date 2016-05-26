@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml">
+	<ui:define name="conteudo">
+		<h:form>
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton value="Emitir" />
+				</p:toolbarGroup>
+			</p:toolbar>
+			<p:panelGrid columns="2" styleClass="grid-fullwidth grid-spaced">
+				<p:outputLabel value="Data de criação" />
+				<h:panelGroup>
+					<p:calendar pattern="dd/MM/yyyy" locale="pt_BR" />
+					<h:outputText value="a" />
+					<p:calendar pattern="dd/MM/yyyy" locale="pt_BR" />
+				</h:panelGroup>
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
