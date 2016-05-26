@@ -18,9 +18,13 @@
 			<p:panelGrid columns="2" styleClass="grid-fullwidth grid-spaced">
 				<p:outputLabel value="Data de criação" />
 				<h:panelGroup>
-					<p:calendar pattern="dd/MM/yyyy" locale="pt_BR" />
+					<p:calendar pattern="dd/MM/yyyy" locale="pt_BR"
+						mindate="#{relatorioPedidosEmitidosBean.dataMinima}"
+						maxdate="#{relatorioPedidosEmitidosBean.dataMaxima}" />
 					<h:outputText value="a" />
-					<p:calendar pattern="dd/MM/yyyy" locale="pt_BR" />
+					<p:calendar pattern="dd/MM/yyyy" locale="pt_BR"
+						mindate="#{relatorioPedidosEmitidosBean.dataMinima}"
+						maxdate="#{relatorioPedidosEmitidosBean.dataMaxima}" />
 				</h:panelGroup>
 			</p:panelGrid>
 		</h:form>
