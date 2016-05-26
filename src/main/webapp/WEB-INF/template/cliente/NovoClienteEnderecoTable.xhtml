@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+		<p:dataTable widgetVar="enderecoTable" var="endereco" value="#{cadastroClienteBean.enderecos}"
+			styleClass="grid-spaced">
+			<!-- Coluna de logradouro -->
+
+			<f:facet name="header">
+				Endereços
+				<div class="util-right">
+					<p:commandButton icon="ui-icon-plus" value="Adicionar"
+						action="#{cadastroEnderecoBean.novo()}"
+						process="@this"
+						update="@widgetVar(dlgAddEndereco)"
+						oncomplete="PF('dlgAddEndereco').show();">
+						
+						<f:setPropertyActionListener value="#{null}"
+							target="#{cidadeEstadoBean.estado}" />
+					</p:commandButton>
+				</div>
+			</f:facet>
+			
+			<!-- 
+			<p:column headerText="Codigo">
+				<h:outputText value="#{endereco.codigo}" />
+			</p:column>
+			 -->
+
+			<p:column headerText="Logradouro">
+				<h:outputText value="#{endereco.logradouro}" />
+			</p:column>
+
+			<!-- Coluna de numero -->
+			<p:column headerText="Número">
+				<h:outputText value="#{endereco.numero}" />
+			</p:column>
+
+			<!-- Coluna de Complemento -->
+			<p:column headerText="Complemento">
+				<h:outputText value="#{endereco.complemento}" />
+			</p:column>
+
+			<!-- Coluna de CEP -->
+			<p:column headerText="CEP">
+				<h:outputText value="#{endereco.cep}" />
+			</p:column>
+
+			<!-- Coluna de Estado -->
+			<p:column headerText="UF">
+				<h:outputText value="#{endereco.cidade.estado.sigla}" />
+			</p:column>
+
+			<!-- Coluna de Cidade -->
+			<p:column headerText="Cidade">
+				<h:outputText value="#{endereco.cidade.nome}" />
+			</p:column>
+
+			<p:column>
+				<p:commandButton icon="ui-icon-pencil"
+					update="@widgetVar(dlgAddEndereco)"
+					oncomplete="PF('dlgAddEndereco').show();" process="@namingcontainer">
+					<f:setPropertyActionListener value="#{endereco}"
+						target="#{cadastroEnderecoBean.endereco}" />
+					<f:setPropertyActionListener value="#{endereco.cidade.estado}"
+							target="#{cidadeEstadoBean.estado}" />
+				</p:commandButton>
+
+				<p:commandButton icon="ui-icon-close" process="@this" update="@namingcontainer"
+					action="#{cadastroClienteBean.deletaEndereco(endereco)}" />
+
+			</p:column>
+
+		</p:dataTable>
+
+</ui:composition>

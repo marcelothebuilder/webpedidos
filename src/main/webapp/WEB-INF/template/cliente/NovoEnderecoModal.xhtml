@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<p:dialog header="Adicionar um endereço" widgetVar="dlgAddEndereco"
+		modal="true">
+		<h:form>
+			<p:panelGrid columns="2" styleClass="grid-fullwidth grid-plain"
+				columnClasses="grid-column-label grid-column-input">
+
+				<p:outputLabel for="@next" value="Logradouro" />
+				<p:inputText value="#{cadastroEnderecoBean.endereco.logradouro}" />
+
+				<p:outputLabel for="@next" value="Número" />
+				<p:inputText value="#{cadastroEnderecoBean.endereco.numero}" />
+
+				<p:outputLabel for="@next" value="Complemento" />
+				<p:inputText value="#{cadastroEnderecoBean.endereco.complemento}" />
+
+				<p:outputLabel for="@next" value="CEP" />
+				<p:inputText value="#{cadastroEnderecoBean.endereco.cep}" />
+
+				<p:outputLabel for="@next" value="Estado" />
+				<p:autoComplete forceSelection="true" dropdown="false"
+					converter="#{estadoConverter}" maxResults="6" immediate="true"
+					cache="true" emptyMessage="Nenhum resultado"
+					value="#{cidadeEstadoBean.estado}"
+					completeMethod="#{cidadeEstadoBean.pesquisaEstado}" var="estado"
+					itemLabel="#{estado.nome}" itemValue="#{estado}">
+					<p:ajax event="itemSelect" process="@this" update="@next:@next" />
+					<p:ajax event="change" process="@this" update="@next:@next" />
+				</p:autoComplete>
+
+				<p:outputLabel for="@next" value="Cidade" />
+				<p:autoComplete disabled="#{cidadeEstadoBean.estadoNaoSelecionado}"
+					forceSelection="true" dropdown="false" maxResults="10" cache="true"
+					emptyMessage="Nenhum resultado"
+					value="#{cadastroEnderecoBean.endereco.cidade}"
+					converter="#{cidadeConverter}"
+					completeMethod="#{cidadeEstadoBean.pesquisaCidade}" var="cidade"
+					itemLabel="#{cidade.nome}" itemValue="#{cidade}" />
+
+				<p:commandButton value="Cancelar" type="button"
+					onclick="PF('dlgAddEndereco').hide()" />
+				<p:commandButton value="Salvar" process="@form" update="@widgetVar(enderecoTable)"
+					action="#{cadastroEnderecoBean.salvar()}"
+					oncomplete="PF('dlgAddEndereco').hide()" />
+
+			</p:panelGrid>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>

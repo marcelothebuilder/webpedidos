@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:panelGrid columns="4" styleClass="grid-fullwidth"
+		columnClasses="grid-label, grid-input">
+		<p:outputLabel value="Data de entrega" for="@next" />
+		<p:calendar pattern="dd/MM/yyyy"
+			value="#{cadastroPedidoBean.pedido.dataEntrega}" disabled="#{cadastroPedidoBean.pedido.naoAlteravel}"/>
+
+		<p:spacer />
+		<p:spacer />
+
+		<p:outputLabel for="@next" value="Estado" />
+		<p:autoComplete forceSelection="true" dropdown="false"
+			converter="#{estadoConverter}" maxResults="6" immediate="true"
+			cache="true" emptyMessage="Nenhum resultado" disabled="#{cadastroPedidoBean.pedido.naoAlteravel}"
+			value="#{cadastroPedidoBean.cidadeEstadoBean.estado}"
+			completeMethod="#{cadastroPedidoBean.cidadeEstadoBean.pesquisaEstado}"
+			var="estado" itemLabel="#{estado.nome}" itemValue="#{estado}" >
+
+			<p:ajax event="itemSelect" process="@this" update="@next:@next" partialSubmit="true" />
+			<p:ajax event="change" process="@this" update="@next:@next" partialSubmit="true" />
+
+		</p:autoComplete>
+
+		<p:outputLabel for="@next" value="Cidade" />
+		<p:autoComplete
+			disabled="#{cadastroPedidoBean.cidadeEstadoBean.estado == null || cadastroPedidoBean.pedido.naoAlteravel }"
+			forceSelection="true" dropdown="false" maxResults="10" cache="true"
+			emptyMessage="Nenhum resultado" 
+			converter="#{cidadeConverter}"
+			value="#{cadastroPedidoBean.cidadeEstadoBean.cidade}"
+			completeMethod="#{cadastroPedidoBean.cidadeEstadoBean.pesquisaCidade}"
+			var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade}" />
+
+		<p:outputLabel value="Logradouro" for="@next" />
+		<p:inputText size="30" disabled="#{cadastroPedidoBean.pedido.naoAlteravel}"
+			value="#{cadastroPedidoBean.pedido.enderecoEntrega.logradouro}" />
+
+		<p:outputLabel value="Número" for="@next" />
+		<p:inputText size="10" disabled="#{cadastroPedidoBean.pedido.naoAlteravel}"
+			value="#{cadastroPedidoBean.pedido.enderecoEntrega.numero}" />
+
+		<p:outputLabel value="Complemento" for="@next" />
+		<p:inputText size="20" disabled="#{cadastroPedidoBean.pedido.naoAlteravel}"
+			value="#{cadastroPedidoBean.pedido.enderecoEntrega.complemento}" />
+
+		<p:outputLabel value="CEP" for="@next" />
+		<p:inputText size="20" disabled="#{cadastroPedidoBean.pedido.naoAlteravel}"
+			value="#{cadastroPedidoBean.pedido.enderecoEntrega.cep}" />
+	</p:panelGrid>
+
+</ui:composition>

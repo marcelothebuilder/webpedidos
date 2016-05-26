@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml">
+	<f:metadata>
+		<f:viewParam name="codigoPedido"
+			value="#{cadastroPedidoBean.pedidoParametro}"
+			converter="#{pedidoConverter}" />
+	</f:metadata>
+
+	<ui:define name="conteudo">
+		<h1 class="page-title">
+			<h:outputText value="Novo pedido"
+				rendered="#{cadastroPedidoBean.pedido.novo}" />
+			<h:outputText value="Alterando pedido"
+				rendered="#{cadastroPedidoBean.pedido.existente}" />
+		</h1>
+
+		<h:form>
+			<p:messages autoUpdate="true" />
+
+			<ui:include src="/WEB-INF/template/pedido/NovoPedidoToolbar.xhtml" />
+
+			<ui:include
+				src="/WEB-INF/template/pedido/NovoPedidoCadastroForm.xhtml" />
+
+			<p:tabView>
+				<p:tab title="Itens">
+					<ui:include src="/WEB-INF/template/pedido/tabs/Itens.xhtml" />
+				</p:tab>
+
+				<p:tab title="Dados de entrega">
+					<ui:include
+						src="/WEB-INF/template/pedido/tabs/DadosDeEntrega.xhtml" />
+				</p:tab>
+
+				<p:tab title="Observação">
+					<p:inputTextarea styleClass="grid-fullwidth"
+						disabled="#{cadastroPedidoBean.pedido.naoAlteravel}"
+						value="#{cadastroPedidoBean.pedido.observacao}" />
+				</p:tab>
+			</p:tabView>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

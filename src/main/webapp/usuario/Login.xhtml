@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml">
+	<!-- clear header -->
+	<ui:define name="header"></ui:define>
+	<ui:define name="conteudo">
+	
+		<f:metadata>
+			<f:viewParam name="invalid" value="#{loginBean.invalid}" />
+			<f:event listener="#{loginBean.preRender()}" type="preRenderView"/>
+		</f:metadata>
+		
+		<div id="login-dialog">
+			
+			<h1>Login</h1>
+			<p:messages autoUpdate="true"></p:messages>
+			<h:form prependId="false">
+				<h:panelGrid columns="2" styleClass="grid-dialog dialog-regular">
+					<p:outputLabel for="@next" value="E-mail" />
+					<p:inputText id="securityUsername" value="#{loginBean.email}" />
+
+					<p:outputLabel for="@next" value="Senha" />
+					<p:inputText type="password" id="securityPassword"/>
+					
+					<p:commandButton value="Login" ajax="false" action="#{loginBean.login()}"/>
+				</h:panelGrid>
+			</h:form>
+		</div>
+	</ui:define>
+	<!-- clear footer -->
+	<ui:define name="footer"></ui:define>
+</ui:composition>
+</html>

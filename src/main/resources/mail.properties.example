@@ -1,0 +1,6 @@
+mail.server.host=
+mail.server.port=
+mail.enable.ssl=
+mail.auth=true
+mail.username=
+mail.password=

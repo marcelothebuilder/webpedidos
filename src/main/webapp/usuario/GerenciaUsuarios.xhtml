@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml">
+	<ui:define name="conteudo">
+		<h1 class="page-title">Gerenciar Usuários</h1>
+
+		<p:messages autoUpdate="true" />
+
+		<ui:include
+			src="/WEB-INF/template/usuario/GerenciaUsuariosAlteraDialog.xhtml" />
+		<ui:include
+			src="/WEB-INF/template/usuario/GerenciaUsuariosDeletaDialog.xhtml" />
+		<ui:include
+			src="/WEB-INF/template/usuario/GerenciaUsuariosFiltraDialog.xhtml" />
+
+		<!-- Tabela de resultados -->
+		<h:form>
+			<p:dataTable widgetVar="usuariosTable" selectionMode="single"
+				lazy="false" value="#{cadastroUsuarioBean.usuarios}" var="usuario"
+				selection="#{cadastroUsuarioBean.usuario}"
+				rowKey="#{usuario.codigo}">
+
+				<p:ajax event="rowSelect" update="botaoApagar, botaoEditar"
+					listener="#{cadastroUsuarioBean.onRowSelect}" process="@this" />
+
+				<f:facet name="header">
+					<h:outputText value="Usuários" />
+					<div class="util-left">
+						<p:commandButton id="botaoFiltrar" icon="ui-icon-search"
+							value="Filtragem" update="@widgetVar(filtragemUsuario)"
+							process="@this" oncomplete="PF('filtragemUsuario').show();" />
+					</div>
+					<div class="util-right">
+						<p:commandButton id="botaoAdicionar" icon="ui-icon-pencil"
+							value="Adicionar" update="@widgetVar(editorUsuario)"
+							actionListener="#{cadastroUsuarioBean.limpaUsuario}"
+							process="@this" oncomplete="PF('editorUsuario').show();" />
+
+						<p:commandButton id="botaoEditar" icon="ui-icon-pencil"
+							value="Alterar" update="@widgetVar(editorUsuario)"
+							process="@namingcontainer"
+							disabled="#{!cadastroUsuarioBean.rowSelected}"
+							oncomplete="PF('editorUsuario').show();" />
+
+						<p:commandButton id="botaoApagar" icon="ui-icon-close"
+							value="Apagar" update="@widgetVar(deletaUsuario)"
+							process="@namingcontainer"
+							disabled="#{!cadastroUsuarioBean.rowSelected}"
+							oncomplete="PF('deletaUsuario').show();" />
+					</div>
+
+				</f:facet>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Usuário" />
+					</f:facet>
+					<h:outputText value="#{usuario.nome}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="E-mail" />
+					</f:facet>
+					<h:outputText value="#{usuario.email}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Ativo" />
+					</f:facet>
+					<h:outputText value="#{usuario.ativo ? 'Ativo' : 'Inativo'}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Grupos" />
+					</f:facet>
+
+					<h:dataTable value="#{usuario.grupos}" var="grupo">
+						<p:column>
+							#{grupo.nome}
+						</p:column>
+					</h:dataTable>
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>
+

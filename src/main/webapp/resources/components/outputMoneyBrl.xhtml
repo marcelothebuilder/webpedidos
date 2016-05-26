@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:composite="http://xmlns.jcp.org/jsf/composite">
+
+<composite:interface>
+	<composite:attribute name="value" />
+</composite:interface>
+
+<composite:implementation>
+	<span id="#{cc.clientId}">
+		<h:outputText value="#{cc.attrs.value}" lang="pt" title="Valor em dinheiro">
+			<f:convertNumber type="currency" locale="pt_BR" minFractionDigits="2"
+				maxFractionDigits="2" currencyCode="BRL" currencySymbol="R$"
+				groupingUsed="true" />
+		</h:outputText>
+	</span>
+</composite:implementation>
+</html>

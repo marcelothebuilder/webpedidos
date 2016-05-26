@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:custom="http://xmlns.jcp.org/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+	<p:panelGrid columns="4" styleClass="grid-fullwidth grid-spaced"
+		columnClasses="grid-label, grid-input">
+		<!-- DIREITA -->
+		<p:outputLabel value="Número" for="@next"
+			rendered="#{cadastroPedidoBean.pedido.existente}" />
+		<h:outputText value="#{cadastroPedidoBean.pedido.codigo}"
+			rendered="#{cadastroPedidoBean.pedido.existente}" />
+
+		<!-- ESQUERDA -->
+		<p:outputLabel value="Data de criação" for="@next"
+			rendered="#{cadastroPedidoBean.pedido.existente}" />
+		<h:outputText value="#{cadastroPedidoBean.pedido.dataCriacao}" rendered="#{cadastroPedidoBean.pedido.existente}">
+			<f:convertDateTime locale="pt_BR" type="both" />
+		</h:outputText>
+
+		<p:outputLabel value="Status" for="@next" />
+		<h:outputText
+			value="#{cadastroPedidoBean.pedido.statusPedido.descricao}" />
+
+		<p:outputLabel value="Vendedor" for="@next" />
+		<p:selectOneMenu value="#{cadastroPedidoBean.pedido.vendedor}"
+			converter="#{usuarioConverter}"
+			disabled="#{cadastroPedidoBean.pedido.naoAlteravel}">
+			<f:selectItem itemLabel="Selecione um vendedor"
+				noSelectionOption="true" />
+			<f:selectItems value="#{cadastroPedidoBean.vendedores}"
+				var="vendedor" itemLabel="#{vendedor.nome}" itemValue="#{vendedor}"></f:selectItems>
+		</p:selectOneMenu>
+	
+		<!-- Seleção de Cliente -->
+		<p:outputLabel value="Cliente" for="@next" />
+		<p:autoComplete value="#{cadastroPedidoBean.pedido.cliente}"
+			converter="#{clienteConverter}"
+			disabled="#{cadastroPedidoBean.pedido.naoAlteravel}"
+			completeMethod="#{cadastroPedidoBean.pesquisaCliente}" var="cliente"
+			forceSelection="true" itemLabel="#{cliente.nome}"
+			itemValue="#{cliente}" dropdown="true" />
+
+		<!-- Seleção de Forma de Pagamento -->
+		<p:outputLabel value="Forma de pagamento" for="@next" />
+		<p:selectOneMenu value="#{cadastroPedidoBean.pedido.formaPagamento}" disabled="#{cadastroPedidoBean.pedido.naoAlteravel}">
+			<f:selectItem itemLabel="Selecione uma forma de pagamento"
+				noSelectionOption="true" />
+
+			<f:selectItems value="#{cadastroPedidoBean.formasPagamento}"
+				var="forma" itemValue="#{forma}" itemLabel="#{forma.toString()}" />
+		</p:selectOneMenu>
+
+		<!-- Edição de Valor de Frete -->
+		<p:outputLabel value="Valor do frete" for="@next" />
+		<custom:inputMoneyBrl value="#{cadastroPedidoBean.pedido.valorFrete}"
+			label="Valor do frete"
+			disabled="#{cadastroPedidoBean.pedido.naoAlteravel}">
+			<p:ajax event="change" process="@this" update="@form:totalPedido" />
+		</custom:inputMoneyBrl>
+
+		<p:outputLabel value="Subtotal" for="@next" />
+		<custom:outputMoneyBrl value="#{cadastroPedidoBean.pedido.subtotal}"
+			id="subtotal" />
+
+		<!-- Edição de Valor do Desconto -->
+		<p:outputLabel value="Valor do desconto" for="@next" />
+		<custom:inputMoneyBrl
+			value="#{cadastroPedidoBean.pedido.valorDesconto}"
+			disabled="#{cadastroPedidoBean.pedido.naoAlteravel}">
+			<p:ajax event="change" process="@this" update="@form:totalPedido" />
+		</custom:inputMoneyBrl>
+
+		<!-- Edição de Valor do Pedido -->
+		<p:outputLabel value="Total do pedido" for="@next" />
+		<custom:outputMoneyBrl
+			value="#{cadastroPedidoBean.pedido.valorTotalCalculado}"
+			id="totalPedido" />
+	</p:panelGrid>
+
+</ui:composition>

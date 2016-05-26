@@ -1,0 +1,237 @@
+@CHARSET "UTF-8";
+
+/* Estilos do layout padrão */
+body {
+	font-size: 16px;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0px;
+	font-weight: normal;
+}
+
+header {
+	padding: 10px;
+	margin-bottom: 10px;
+	background-color: #545454;
+	color: #fff;
+	box-shadow: 0 2px 2px #ccc;
+}
+
+header:after {
+	content: ' ';
+	clear: both;
+	display:block;
+}
+
+header .logo {
+	display: inline-block;
+	height: 100%;
+}
+
+header .logo a {
+	font-size:0;
+	height: 100%;
+}
+
+header .logo img {
+	display:block;
+	height: 45px;
+}
+
+header .menu {
+	float: right;
+}
+
+header .menu:after {
+	content: ' ';
+	clear: both;
+	display:block;
+}
+
+header .menu .welcome-user {
+	/* position */
+	float: left;
+	text-align: center;
+	vertical-align: middle;
+	
+	/* sizing */
+	height: 100%;
+	line-height: 45px;
+	margin-right: 15px;
+	
+}
+
+header .menu .buttons {
+	float: right;
+}
+
+#conteudo {
+	padding: 10px;
+}
+
+footer {
+	padding: 10px;
+}
+
+/* utilidades */
+.util-left {
+	float: left;
+}
+
+.util-right {
+	float: right;
+}
+
+/* global overrides */
+.ui-datatable input[type="text"], .ui-datatable .ui-autocomplete {
+	box-sizing: border-box;
+	width: 100%;
+}
+
+.ui-panelgrid  tbody .ui-panelgrid-cell {
+	padding: 6px 10px;
+}
+
+
+.ui-state-disabled {
+	/*color: black;*/
+	opacity: .6 !important;
+}
+
+a {
+	color: #3D8EB9;
+}
+
+/* Componente de exibição do estado de requisições AJAX*/
+#ajax-status {
+	position: fixed;
+	top: 0;
+	right: 0;
+	/* margin-top deve ser maior que o tamanho da barra do topo + 10px */
+	margin-top: 65px;
+	margin-right: 10px;
+	pointer-events: none;
+	z-index: 999;
+}
+
+/* Dialogo de login */
+#login-dialog {
+	/* dirty hack to center horizontally */
+	display: table;
+	margin: 0 auto;
+	/* end of hack */
+	margin-top: 100px;
+}
+
+#login-dialog h1 {
+	font-size: 1.6rem;
+	padding: 0;
+	margin: 0;
+}
+
+/* Estilos de diálogos, devem ser combinados entre si para criar um diálogo */
+/* grid-dialog* fornece a estrutura e .dialog-* fornece a aparência */
+.grid-fullwidth {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.grid-label {
+	white-space: nowrap;
+	padding-right: 30px;
+	width: 200px;
+}
+
+.grid-input {
+	/* width: 99%; */
+	
+}
+
+.grid-dialog {
+	border-style: solid;
+	border-radius: 8px;
+	border-width: 1px;
+	margin-top: 8px;
+	padding: 10px;
+}
+
+.dialog-regular {
+	border-color: #ccc;
+	background-color: #f2f2f2;
+	box-shadow: 0 0 5px #f2f2f2;
+}
+
+.grid-plain,
+.grid-plain td,
+.grid-plain tr {
+	border: none !important;
+}
+
+.grid-spaced {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.grid-center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Estilo a ser aplicado em títulos de páginas de ações e cadastros */
+/* aplica em: h1 */
+.page-title {
+	/* reseta a margem do component h1 */
+	margin: 0.8rem 0 0.8rem 0;
+}
+
+.grid-column-label {
+	max-width: 100px;
+}
+
+.grid-column-input {
+	
+}
+
+.column-code,
+.column-quantity,
+.column-status,
+.column-date {
+	text-align: center;
+	width: 140px;
+}
+
+.column-money {
+	text-align: right;
+	width: 140px;
+}
+
+.column-buttons {
+	text-align: center;
+	width: 150px;
+}
+
+/* espaços diferentes de input */
+.input-client-name {
+	min-width: 400px;
+}
+
+.input-client-email {
+	min-width: 250px;
+}
+
+/* estilos a serem aplicados no componente dataTable */
+.ui-datatable-header:before,
+.ui-datatable-header:after {
+	display: table;
+	content: " ";
+} 
+
+.ui-datatable-header:after {
+	clear: both;
+}
+
+/* adiciona espaço entre os radio+label */
+/* temos que td(radio) td(label) td2(radio) td2(label) */
+.ui-selectoneradio td:nth-child(2n),
+.ui-selectmanycheckbox td:nth-child(2n) {
+	padding-right: 16px;
+}

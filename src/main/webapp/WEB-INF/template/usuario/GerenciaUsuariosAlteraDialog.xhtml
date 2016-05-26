@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<!-- Diálogo para adicionar/alterar usuário -->
+	<p:dialog widgetVar="editorUsuario" modal="true" dynamic="true">
+		<h:form>
+			<h3>
+				<h:outputText value="Adicionando usuário"
+					rendered="#{cadastroUsuarioBean.novoUsuario}" />
+				<h:outputText value="Alterando usuário"
+					rendered="#{cadastroUsuarioBean.usuarioExistente}" />
+			</h3>
+
+			<p:panelGrid columns="2"
+				styleClass="grid-fullwidth grid-spaced grid-plain"
+				columnClasses="grid-column-label grid-column-input">
+				
+				<p:outputLabel value="E-mail" for="@next" />
+				<p:inputText value="#{cadastroUsuarioBean.usuario.email}" readonly="#{cadastroUsuarioBean.usuarioExistente}" />
+
+				<p:outputLabel value="Nome" for="@next" />
+				<p:inputText value="#{cadastroUsuarioBean.usuario.nome}" />
+
+				<!-- Exibe quando for novo usuario -->
+				<p:outputLabel value="Senha" for="@next"
+					rendered="#{cadastroUsuarioBean.novoUsuario}" />
+				<!-- Exibe quando estiver alterando -->
+				<p:outputLabel value="Nova Senha" for="@next"
+					rendered="#{cadastroUsuarioBean.usuarioExistente}" />
+
+				<p:password goodLabel="Boa" strongLabel="Forte" weakLabel="Fraca"
+					label="Senha" promptLabel="Insira uma senha" feedback="true"
+					required="#{cadastroUsuarioBean.novoUsuario}"
+					match="@next:@next:@next" value="#{cadastroUsuarioBean.novaSenha}" />
+
+				<!-- Exibe quando for novo usuario -->
+				<p:outputLabel value="Senha (Confirmação)" for="@next"
+					rendered="#{cadastroUsuarioBean.novoUsuario}" />
+				<!-- Exibe quando estiver alterando -->
+				<p:outputLabel value="Nova Senha (Confirmação)" for="@next"
+					rendered="#{cadastroUsuarioBean.usuarioExistente}" />
+
+				<p:password goodLabel="Boa" strongLabel="Forte" weakLabel="Fraca"
+					label="Senha (confirmação)" promptLabel="Insira uma senha"
+					feedback="true" required="#{cadastroUsuarioBean.novoUsuario}"
+					value="#{cadastroUsuarioBean.novaSenha}" />
+
+				<p:outputLabel value="Grupos" />
+				<p:selectManyCheckbox value="#{cadastroUsuarioBean.usuario.grupos}"
+					columns="2" layout="grid" converter="#{grupoConverter}">
+					<f:attribute name="collectionType" value="java.util.HashSet" />
+					<f:selectItems value="#{cadastroUsuarioBean.grupoOpcoes}"
+						var="grupo" itemLabel="#{grupo.nome}" itemValue="#{grupo}" />
+				</p:selectManyCheckbox>
+
+				<p:outputLabel value="Ativo" for="@next" />
+
+				<!-- <p:selectBooleanCheckbox itemLabel="Usuário ativo"
+					value="#{cadastroUsuarioBean.usuario.ativo}" /> -->
+
+				<p:inputSwitch offLabel="Não" onLabel="Sim"
+					value="#{cadastroUsuarioBean.usuario.ativo}" />
+
+			</p:panelGrid>
+
+			<p:button onclick="PF('editorUsuario').hide(); return false"
+				value="Cancelar" />
+			<p:commandButton value="Salvar"
+				action="#{cadastroUsuarioBean.salvar}" process="@form"
+				update="@widgetVar(usuariosTable) @form" oncomplete="PF('editorUsuario').hide();" />
+		</h:form>
+	</p:dialog>
+
+</ui:composition>

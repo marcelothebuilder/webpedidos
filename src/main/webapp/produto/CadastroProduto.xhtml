@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:custom="http://xmlns.jcp.org/jsf/composite/components">
+
+<!-- Recebe: codigoProduto -->
+
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml">
+	<ui:define name="conteudo">
+		<f:metadata>
+			<f:viewParam name="codigoProduto"
+				value="#{cadastroProdutoBean.produtoEditavel}"
+				converter="#{produtoConverter}" />
+			<f:event listener="#{cadastroProdutoBean.inicializar}"
+				type="preRenderView" />
+		</f:metadata>
+
+		<f:verbatim rendered="#{!cadastroProdutoBean.editando}">
+			<h1 class="page-title">Novo Produto</h1>
+		</f:verbatim>
+
+		<f:verbatim rendered="#{cadastroProdutoBean.editando}">
+			<h1 class="page-title">Editando Produto</h1>
+		</f:verbatim>
+
+		<h:form>
+
+			<p:messages autoUpdate="true" />
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:button value="Novo" outcome="/produto/CadastroProduto" />
+					<p:commandButton value="Salvar"
+						action="#{cadastroProdutoBean.salvar}" update="@form" />
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa" outcome="/produto/PesquisaProduto" />
+				</p:toolbarGroup>
+
+			</p:toolbar>
+
+			<p:panelGrid columns="2" styleClass="grid-fullwidth grid-spaced"
+				columnClasses="grid-label, grid-input">
+				<!-- SKU do produto -->
+				<p:outputLabel for="@next" value="SKU" />
+				<p:inputMask mask="aaa9?9999999999999999"
+					placeholder="Identificação do produto" maxlength="16"
+					value="#{cadastroProdutoBean.produto.sku}" />
+
+				<!-- Nome do produto -->
+				<p:outputLabel for="@next" value="Nome do produto" />
+				<p:inputText placeholder="Nome do produto" maxlength="80"
+					value="#{cadastroProdutoBean.produto.nome}" />
+
+				<!-- Categoria do produto -->
+				<p:outputLabel for="@next" value="Categoria" />
+				<p:selectOneMenu value="#{cadastroProdutoBean.categoriaPai}">
+					<f:converter binding="#{categoriaConverter}" />
+					<f:selectItem itemLabel="Selecione a categoria" />
+
+					<f:selectItems value="#{cadastroProdutoBean.categoriasRaiz}"
+						var="categoria" itemValue="#{categoria}"
+						itemLabel="#{categoria.descricao}" />
+
+					<!-- processa este e atualiza subcategorias -->
+					<p:ajax update="@next:@next" process="@this" partialSubmit="true" />
+
+
+				</p:selectOneMenu>
+
+				<!-- Subcategoria do produto -->
+				<p:outputLabel for="@next" value="Subcategoria" />
+				<p:selectOneMenu value="#{cadastroProdutoBean.produto.categoria}"
+					required="true">
+					<f:converter binding="#{categoriaConverter}" partialSubmit="true" />
+					<f:selectItem itemLabel="Selecione a subcategoria" />
+					<f:selectItems value="#{cadastroProdutoBean.subcategorias}"
+						var="subcategoria" itemLabel="#{subcategoria.descricao}"
+						itemValue="#{subcategoria}" />
+				</p:selectOneMenu>
+
+				<!-- Valor unitário -->
+				<p:outputLabel for="@next" value="Valor unitário" />
+				<custom:inputMoneyBrl
+					value="#{cadastroProdutoBean.produto.valorUnitario}" />
+
+				<!-- Quantidade em estoque -->
+				<p:outputLabel for="@next" value="Estoque" title="Estoque" />
+				<p:spinner label="Estoque" title="estoque"
+					value="#{cadastroProdutoBean.produto.quantidadeEstoque}" />
+
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

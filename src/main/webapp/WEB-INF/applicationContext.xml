@@ -1,0 +1,66 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	<beans:bean id="appUserDetailsService" 
+		class="com.github.marcelothebuilder.webpedidos.security.AppUserDetailsService" />
+	
+
+	<http pattern="/usuario/Login.xhtml" security="none" />
+	<http pattern="/Erro.xhtml" security="none" />
+	<http pattern="/AcessoNegado.xhtml" security="none" />
+	<http pattern="/javax.faces.resource/**" security="none" />
+
+	<http auto-config="false" use-expressions="true">
+		<custom-filter ref="exceptionTranslationFilter" before="FILTER_SECURITY_INTERCEPTOR" />
+		
+		<form-login
+			login-page="/usuario/Login.xhtml"
+			default-target-url="/"
+			username-parameter="securityUsername" 
+			password-parameter="securityPassword"
+			authentication-failure-url="/usuario/Login.xhtml?invalid=true"
+			always-use-default-target="true" />
+			
+		<intercept-url pattern="/Home.xhtml" access="isAuthenticated()" />
+		<intercept-url pattern="/pedido/**"  access="hasAnyRole('VENDEDORES', 'AUXILIARES', 'ADMINISTRADORES')" />
+		<intercept-url pattern="/produto/**" access="hasAnyRole('ADMINISTRADORES')" />
+		<intercept-url pattern="/cliente/**" access="hasAnyRole('ADMINISTRADORES')" />
+		<intercept-url pattern="/produto/**" access="hasAnyRole('ADMINISTRADORES')" />
+		<intercept-url pattern="/usuario/**" access="hasAnyRole('ADMINISTRADORES')" />
+		<intercept-url pattern="/**" access="denyAll" />
+
+		<logout logout-url="/Logout" invalidate-session="true" />
+	</http>
+
+	<authentication-manager>
+		<authentication-provider user-service-ref="appUserDetailsService">
+			<password-encoder hash="plaintext" />
+		</authentication-provider>
+	</authentication-manager>
+	
+	<!-- IceSoft -->
+	
+	<!-- http://static.springsource.org/spring-security/site/docs/3.1.x/reference/core-web-filters.html -->
+    <beans:bean id="exceptionTranslationFilter" class="org.springframework.security.web.access.ExceptionTranslationFilter">
+      <beans:property name="accessDeniedHandler" ref="jsfAccessDeniedHandler"/>
+      <beans:property name="authenticationEntryPoint" ref="jsfAuthenticationEntryPoint"/>
+    </beans:bean>
+
+    <beans:bean id="jsfAccessDeniedHandler" class="com.github.marcelothebuilder.webpedidos.security.redirect.JsfAccessDeniedHandler">
+        <beans:property name="loginPath" value="/AcessoNegado.xhtml"  />
+        <beans:property name="contextRelative" value="false"  />
+    </beans:bean>
+
+    <beans:bean id="jsfAuthenticationEntryPoint" class="com.github.marcelothebuilder.webpedidos.security.redirect.JsfLoginUrlAuthenticationEntryPoint">
+        <beans:property name="loginFormUrl" value="/usuario/Login.xhtml"/>
+        <beans:property name="redirectStrategy" ref="jsfRedirectStrategy" />
+    </beans:bean >
+
+
+    <beans:bean id="jsfRedirectStrategy" class="com.github.marcelothebuilder.webpedidos.security.redirect.JsfRedirectStrategy"/>
+	
+</beans:beans>

@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:custom="http://xmlns.jcp.org/jsf/composite/components">
+
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml">
+	<ui:define name="conteudo">
+		<h1 class="page-title">Pesquisa de Clientes</h1>
+
+		<p:messages autoUpdate="true" />
+
+		<h5>Preencha um ou mais critérios de pesquisa.</h5>
+
+		<h:form>
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="Pesquisar" update="@all" process="@form"
+						action="#{pesquisaClienteBean.filtrar}" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" outcome="/cliente/CadastroCliente" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2"
+				styleClass="grid-spaced grid-fullwidth grid-plain"
+				columnClasses="grid-label grid-input">
+
+
+				<p:outputLabel for="@next" value="Nome" />
+				<p:inputText styleClass="input-client-name"
+					value="#{pesquisaClienteBean.clienteFilter.nome}" />
+
+				<p:outputLabel for="@next" value="Tipo de pessoa" />
+				<p:selectOneRadio
+					value="#{pesquisaClienteBean.clienteFilter.tipoPessoa}">
+					<f:selectItems value="#{pesquisaClienteBean.tiposPessoa}"
+						var="tipoPessoa" itemLabel="#{tipoPessoa}"
+						itemValue="#{tipoPessoa}" />
+				</p:selectOneRadio>
+
+				<p:outputLabel for="@next" value="Documento da Receita Federal" />
+				<p:inputText
+					value="#{pesquisaClienteBean.clienteFilter.documentoReceitaFederal}" />
+
+				<p:outputLabel for="@next" value="E-mail" />
+				<p:inputText styleClass="input-client-email"
+					value="#{pesquisaClienteBean.clienteFilter.email}" />
+
+				<p:outputLabel for="@next" value="Estado" />
+				<p:autoComplete forceSelection="true" dropdown="false"
+					converter="#{estadoConverter}" maxResults="6" immediate="true"
+					cache="true" emptyMessage="Nenhum resultado"
+					value="#{pesquisaClienteBean.clienteEstadoCidadeBean.estado}"
+					completeMethod="#{pesquisaClienteBean.clienteEstadoCidadeBean.pesquisaEstado}"
+					var="estado" itemLabel="#{estado.nome}" itemValue="#{estado}">
+
+
+					<p:ajax event="itemSelect" process="@this" update="@next:@next" />
+					<p:ajax event="change" process="@this" update="@next:@next" />
+
+				</p:autoComplete>
+
+				<p:outputLabel for="@next" value="Cidade" />
+				<p:autoComplete
+					disabled="#{pesquisaClienteBean.clienteEstadoCidadeBean.estado == null}"
+					forceSelection="true" dropdown="false" maxResults="10" cache="true"
+					emptyMessage="Nenhum resultado"
+					value="#{pesquisaClienteBean.clienteFilter.cidade}"
+					converter="#{cidadeConverter}"
+					completeMethod="#{pesquisaClienteBean.clienteEstadoCidadeBean.pesquisaCidade}"
+					var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade}" />
+
+			</p:panelGrid>
+
+			<!-- Inserir tabela de results -->
+			<p:dataTable id="clientesTable" widgetVar="clientesTable"
+				value="#{pesquisaClienteBean.clientesData}" var="cliente">
+
+				<p:column>
+					<f:facet name="header">
+						Nome
+					</f:facet>
+					<h:outputText value="#{cliente.nome}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						E-mail
+					</f:facet>
+					<h:outputText value="#{cliente.email}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						Tipo de Pessoa
+					</f:facet>
+					<h:outputText value="#{cliente.tipoPessoa}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						Documento
+					</f:facet>
+					<h:outputText value="#{cliente.documentoReceitaFederal}" />
+				</p:column>
+
+				<p:column>
+					<p:button icon="ui-icon-pencil" outcome="/cliente/CadastroCliente">
+						<f:param name="codigoCliente" value="#{cliente.codigo}" />
+					</p:button>
+					<p:commandButton update="@widgetVar(deletaUsuarioDialog)"
+						icon="ui-icon-close" process="@this"
+						oncomplete="PF('deletaUsuarioDialog').show();">
+						<f:setPropertyActionListener value="#{cliente}"
+							target="#{pesquisaClienteBean.clienteSelecionado}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+		<!-- Diálogo: Deleta usuário -->
+		<p:confirmDialog widgetVar="deletaUsuarioDialog"
+			header="Deletar usuário?">
+			<f:facet name="message">
+				<h:outputText
+					value="Deseja mesmo deletar o usuário #{pesquisaClienteBean.clienteSelecionado.nome}?" />
+			</f:facet>
+
+			<h:form>
+				<p:button value="Cancelar"
+					onclick="PF('deletaUsuarioDialog').hide(); return false;" />
+				<p:commandButton value="Deletar usuário" type="submit"
+					update="@widgetVar(clientesTable)" process="@this"
+					oncomplete="PF('deletaUsuarioDialog').hide();"
+					action="#{pesquisaClienteBean.deletaCliente}" />
+			</h:form>
+		</p:confirmDialog>
+
+	</ui:define>
+</ui:composition>
+</html>

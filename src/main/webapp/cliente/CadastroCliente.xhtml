@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml">
+	<f:metadata>
+		<f:viewParam name="codigoCliente"
+			value="#{cadastroClienteBean.cliente}"
+			converter="#{clienteConverter}" />
+	</f:metadata>
+
+
+	<ui:define name="conteudo">
+		<h1 class="page-title">
+			<h:outputText value="Novo Cliente"
+				rendered="#{cadastroClienteBean.clienteNovo}" />
+			<h:outputText value="Alterando Cliente"
+				rendered="#{cadastroClienteBean.clienteExistente}" />
+		</h1>
+
+		<p:messages autoUpdate="true" />
+
+		<h:form>
+			<p:toolbar>
+				<f:facet name="left">
+					<p:button value="Novo" outcome="/cliente/CadastroCliente" />
+					<p:commandButton value="Salvar"
+						action="#{cadastroClienteBean.salvar}" process="@all"
+						update="@all" />
+				</f:facet>
+				<f:facet name="right">
+					<p:button value="Pesquisa" outcome="/cliente/PesquisaCliente" />
+				</f:facet>
+			</p:toolbar>
+
+			<p:panelGrid columns="2"
+				styleClass="grid-fullwidth grid-spaced grid-plain"
+				columnClasses="grid-column-label grid-column-input">
+
+				<p:outputLabel for="@next" value="Nome" />
+				<p:inputText styleClass="input-client-name"
+					value="#{cadastroClienteBean.cliente.nome}" />
+
+				<p:outputLabel for="@next" value="Tipo de pessoa" />
+				<p:selectOneRadio value="#{cadastroClienteBean.cliente.tipoPessoa}">
+					<f:selectItems value="#{cadastroClienteBean.tiposPessoa}"
+						var="tipoPessoa" itemLabel="#{tipoPessoa}"
+						itemValue="#{tipoPessoa}" />
+				</p:selectOneRadio>
+
+				<p:outputLabel for="@next" value="Documento da Receita Federal" />
+				<p:inputText
+					value="#{cadastroClienteBean.cliente.documentoReceitaFederal}" />
+
+				<p:outputLabel for="@next" value="E-mail" />
+				<p:inputText styleClass="input-client-email"
+					value="#{cadastroClienteBean.cliente.email}" />
+
+			</p:panelGrid>
+
+			<!-- dataTable externalizada -->
+			<ui:include
+				src="/WEB-INF/template/cliente/NovoClienteEnderecoTable.xhtml" />
+		</h:form>
+
+		<ui:include src="/WEB-INF/template/cliente/NovoEnderecoModal.xhtml" />
+
+	</ui:define>
+</ui:composition>
+</html>

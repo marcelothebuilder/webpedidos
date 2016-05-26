@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<!-- Diálogo para filtragem de usuário -->
+	<p:dialog widgetVar="filtragemUsuario" modal="true" dynamic="true">
+		<h:form>
+			<h:panelGrid columns="2">
+				<p:outputLabel value="Nome" for="@next" />
+				<p:inputText value="#{cadastroUsuarioBean.usuarioFilter.nome}" />
+
+				<p:outputLabel value="E-mail" for="@next" />
+				<p:inputText value="#{cadastroUsuarioBean.usuarioFilter.email}" />
+
+				<p:outputLabel value="Grupos" />
+				<p:selectManyCheckbox columns="2" layout="grid"
+					value="#{cadastroUsuarioBean.usuarioFilter.grupos}"
+					converter="#{grupoConverter}">
+					<f:attribute name="collectionType" value="java.util.HashSet" />
+					<f:selectItems value="#{cadastroUsuarioBean.grupoOpcoes}"
+						var="grupo" itemLabel="#{grupo.nome}" itemValue="#{grupo}" />
+				</p:selectManyCheckbox>
+			</h:panelGrid>
+
+
+			<p:button onclick="PF('filtragemUsuario').hide(); return false"
+				value="Cancelar" />
+
+			<p:defaultCommand target="@next:@next" />
+
+			<p:commandButton oncomplete="PF('filtragemUsuario').hide();"
+				type="submit" value="Limpar filtros"
+				action="#{cadastroUsuarioBean.todosUsuarios}" process="@this"
+				update="@widgetVar(usuariosTable)" />
+
+			<p:commandButton oncomplete="PF('filtragemUsuario').hide();"
+				type="submit" value="Filtrar"
+				action="#{cadastroUsuarioBean.filtrar}" process="@form"
+				update="@widgetVar(usuariosTable)" />
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
