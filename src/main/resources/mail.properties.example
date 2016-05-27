@@ -1,6 +1,8 @@
-mail.server.host=
-mail.server.port=
-mail.enable.ssl=
-mail.auth=true
 mail.username=
 mail.password=
+
+mail.smtp.host=
+mail.smtp.socketFactory.port=
+mail.smtp.socketFactory.class=
+mail.smtp.auth=
+mail.smtp.port=
