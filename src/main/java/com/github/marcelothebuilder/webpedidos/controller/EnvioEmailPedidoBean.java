@@ -4,7 +4,6 @@
 package com.github.marcelothebuilder.webpedidos.controller;
 
 import java.io.Serializable;
-import java.util.Locale;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -12,15 +11,13 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.apache.velocity.tools.generic.NumberTool;
-
 import com.github.marcelothebuilder.webpedidos.controller.qualifiers.PedidoEdicao;
 import com.github.marcelothebuilder.webpedidos.model.cliente.Cliente;
 import com.github.marcelothebuilder.webpedidos.model.pedido.Pedido;
+import com.github.marcelothebuilder.webpedidos.util.mail.Mail;
+import com.github.marcelothebuilder.webpedidos.util.mail.MailUtils;
 import com.github.marcelothebuilder.webpedidos.util.mail.Mailer;
-import com.outjected.email.api.MailMessage;
-import com.outjected.email.api.SendFailedException;
-import com.outjected.email.impl.templating.velocity.VelocityTemplate;
+import com.github.marcelothebuilder.webpedidos.util.mail.MailerException;
 
 /**
  * @author Marcelo Paixao Resende
@@ -39,20 +36,21 @@ public class EnvioEmailPedidoBean implements Serializable {
 	private Pedido pedido;
 
 	public void enviarPedido() {
-		MailMessage message = mailer.novaMensagem();
-
 		Cliente cliente = this.pedido.getCliente();
 		String email = cliente.getEmail();
 
 		FacesMessage fMessage = new FacesMessage();
 
+		Mail mail = new Mail();
+		mail.setDestinatario(email);
+		mail.setAssunto(String.format("Seu pedido de venda #%d", this.pedido.getCodigo()));
+		mail.addParametro("pedido", this.pedido);
+		mail.setTemplate(MailUtils.localizaTemplate("pedido.template"));
+
 		try {
-			message.to(email).subject("Seu pedido de venda #" + this.pedido.getCodigo())
-					.bodyHtml(new VelocityTemplate(this.getClass().getResourceAsStream("/emails/pedido.template")))
-					.put("pedido", this.pedido).put("numberTool", new NumberTool()).put("locale", Locale.getDefault())
-					.send();
-			fMessage.setDetail("Pedido enviado por e-mail com sucesso.");
-		} catch (SendFailedException e) {
+			mailer.send(mail);
+			fMessage.setDetail(String.format("Pedido enviado por e-mail para %s com sucesso.", mail.getDestinatario()));
+		} catch (MailerException e) {
 			fMessage.setDetail(e.getMessage());
 		}
 

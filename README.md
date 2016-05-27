@@ -1,7 +1,7 @@
 # Web Pedidos
 > Gerenciamento de pedidos para vendas.
 
-Sistema de gerenciamento de pedidos de vendas acessível via web. Desenvolvido com tecnologias Java: JSF, PrimeFaces, JPA (Hibernate), Spring Security e log4j. Planejado para uso com banco de dados MySQL.
+Sistema de gerenciamento de pedidos de vendas acessível via web. Desenvolvido com tecnologias Java: JSF, PrimeFaces, JPA (Hibernate), Spring Security, Java Mail e log4j. Planejado para uso com banco de dados MySQL.
 
 ## O que faz?
 
@@ -15,7 +15,6 @@ Não recebe pagamentos e não permite acesso direto do cliente.
 
 * Clone o repositório para a sua máquina.
 * Instale o servidor Apache Tomcat 8.0 ou superior.
-* Instale a dependência [simple-email](https://github.com/codylerum/simple-email) manualmente no repositório Maven local.
 * Instale o servidor mysql, crie um database novo e execute nele os scripts extra/install/sql_structure.sql e extra/install/minimal_sql_data.sql.
 * Na pasta src/main/resources, remover a extensão .example dos arquivos mail.properties e META-INF/persistence.xml e configurá-los com as informações de database e envio de e-mails.
 * Compile o projeto e faça o deploy no servidor Apache. O usuário padrão para primeiro acesso é admin@admin.com com a senha admin.
