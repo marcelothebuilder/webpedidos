@@ -25,7 +25,7 @@ import com.github.marcelothebuilder.webpedidos.service.NegocioException;
  */
 @Named
 @ViewScoped
-public final class GerenciaCategoriaBean implements Serializable {
+public class GerenciaCategoriaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
