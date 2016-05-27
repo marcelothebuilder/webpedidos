@@ -1,7 +1,7 @@
 # Web Pedidos
 > Gerenciamento de pedidos para vendas.
 
-Sistema de gerenciamento de pedidos de vendas acessível via web. Desenvolvido com tecnologias Java: JSF, PrimeFaces, JPA (Hibernate), Spring Security, Java Mail e log4j. Planejado para uso com banco de dados MySQL.
+Sistema de gerenciamento de pedidos de vendas acessível via web. Desenvolvido com tecnologias Java: JSF, PrimeFaces, JPA (Hibernate), Spring Security, Java Mail, Apache Velocity e log4j. Planejado para uso com banco de dados MySQL.
 
 ## O que faz?
 
