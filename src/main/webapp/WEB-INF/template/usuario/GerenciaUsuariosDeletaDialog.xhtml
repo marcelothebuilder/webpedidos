@@ -14,7 +14,7 @@
 			<p:button value="Não deletar"
 				onclick="PF('deletaUsuario').hide(); return false;" />
 			<p:commandButton oncomplete="PF('deletaUsuario').hide();"
-				update="@widgetVar(usuariosTable)"
+				update="@widgetVar(usuariosTable)"  disabled="#{seguranca.modoDemonstracao}"
 				value="Deletar usuário #{cadastroUsuarioBean.usuario.nome}"
 				action="#{cadastroUsuarioBean.deletaUsuario()}" />
 		</h:form>

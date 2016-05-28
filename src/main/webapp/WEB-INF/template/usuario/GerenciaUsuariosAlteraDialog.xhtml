@@ -71,7 +71,7 @@
 
 			<p:button onclick="PF('editorUsuario').hide(); return false"
 				value="Cancelar" />
-			<p:commandButton value="Salvar"
+			<p:commandButton value="Salvar"  disabled="#{seguranca.modoDemonstracao}"
 				action="#{cadastroUsuarioBean.salvar}" process="@form"
 				update="@widgetVar(usuariosTable) @form" oncomplete="PF('editorUsuario').hide();" />
 		</h:form>
