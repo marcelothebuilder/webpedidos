@@ -21,6 +21,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -37,7 +38,7 @@ import com.github.marcelothebuilder.webpedidos.model.usuario.Usuario;
  *
  */
 @Entity
-
+@Table(name="pedido")
 public class Pedido implements Serializable {
 	private Long codigo;
 	private Date dataCriacao;

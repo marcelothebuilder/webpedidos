@@ -6,12 +6,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Entity implementation class for Entity: Grupo
  *
  */
 @Entity
+@Table(name="grupo")
 public class Grupo implements Serializable {
 	private Integer codigo;
 	private String nome;

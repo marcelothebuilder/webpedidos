@@ -28,7 +28,7 @@ import org.hibernate.validator.constraints.NotBlank;
  *
  */
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(name = "uk_email", columnNames = { "email" }) })
+@Table(name = "usuario", uniqueConstraints = { @UniqueConstraint(name = "uk_email", columnNames = { "email" }) })
 public class Usuario implements Serializable {
 	private Long codigo;
 	private String nome;
@@ -118,23 +118,11 @@ public class Usuario implements Serializable {
 		this.ativo = ativo;
 	}
 
-	@ManyToMany(cascade = CascadeType.REFRESH, fetch=FetchType.LAZY)
-	@JoinTable(
-		name = "usuario_grupo",
-		joinColumns = {
-			@JoinColumn(
-				name = "usuario_id",
-				foreignKey = @ForeignKey(name = "fk_usuario_grupo_to_usuario")
-				
-			)
-		},
-		inverseJoinColumns = {
-			@JoinColumn(
-					name = "grupo_id",
-					foreignKey = @ForeignKey(name = "fk_usuario_grupo_to_grupo")
-				)
-		}
-	)
+	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JoinTable(name = "usuario_grupo", joinColumns = {
+			@JoinColumn(name = "usuario_id", foreignKey = @ForeignKey(name = "fk_usuario_grupo_to_usuario")
+
+			) }, inverseJoinColumns = { @JoinColumn(name = "grupo_id", foreignKey = @ForeignKey(name = "fk_usuario_grupo_to_grupo")) })
 	public Set<Grupo> getGrupos() {
 		return grupos;
 	}
