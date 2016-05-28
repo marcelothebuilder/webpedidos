@@ -112,6 +112,10 @@ public class Seguranca implements Serializable {
 
 		return false;
 	}
+	
+	public boolean isPermitidoSalvarPedido() {
+		return inAnyRole("ADMINISTRADORES");
+	}
 
 	public boolean isPermitidoEmitirPedido() {
 		return inAnyRole("ADMINISTRADORES", "VENDEDORES");
