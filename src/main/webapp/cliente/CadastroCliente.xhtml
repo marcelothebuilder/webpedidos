@@ -31,7 +31,7 @@
 					<p:button value="Novo" outcome="/cliente/CadastroCliente" />
 					<p:commandButton value="Salvar"
 						action="#{cadastroClienteBean.salvar}" process="@all"
-						update="@all" />
+						update="@all" disabled="#{seguranca.modoDemonstracao}" />
 				</f:facet>
 				<f:facet name="right">
 					<p:button value="Pesquisa" outcome="/cliente/PesquisaCliente" />
