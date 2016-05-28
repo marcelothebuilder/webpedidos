@@ -25,7 +25,8 @@ import org.hibernate.validator.constraints.NotBlank;
  *
  */
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(name = "uk_categoria_nome", columnNames = { "descricao" }) })
+@Table(name = "categoria", uniqueConstraints = {
+		@UniqueConstraint(name = "uk_categoria_nome", columnNames = { "descricao" }) })
 public class Categoria implements Serializable {
 	private Long codigo;
 	private String descricao;

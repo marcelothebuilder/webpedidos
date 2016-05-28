@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -22,6 +23,7 @@ import com.github.marcelothebuilder.webpedidos.model.cliente.Cliente;
 import com.github.marcelothebuilder.webpedidos.validation.Cep;
 
 @Entity
+@Table(name="endereco")
 public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Long codigo;

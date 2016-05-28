@@ -19,7 +19,7 @@ import javax.persistence.UniqueConstraint;
 import com.github.marcelothebuilder.webpedidos.model.endereco.Endereco;
 
 @Entity
-@Table(uniqueConstraints = {
+@Table(name = "cliente", uniqueConstraints = {
 		@UniqueConstraint(name = "uk_doc_receita_federal", columnNames = { "doc_receita_federal" }),
 		@UniqueConstraint(name = "uk_email", columnNames = { "email" }) })
 public class Cliente implements Serializable {

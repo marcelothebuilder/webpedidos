@@ -29,7 +29,7 @@ import com.github.marcelothebuilder.webpedidos.validation.Sku;
  *
  */
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(name = "uk_sku", columnNames = { "sku" }) })
+@Table(name = "produto", uniqueConstraints = { @UniqueConstraint(name = "uk_sku", columnNames = { "sku" }) })
 public class Produto implements Serializable {
 	private Long codigo;
 	private String nome;
