@@ -34,7 +34,8 @@ INSERT INTO `grupo` VALUES
 (2,'Cadastrador do sistema','Cadastradores'),
 (3,'Mantenedor do sistema','Mantenedores'),
 (4,'Vendedor','Vendedores'),
-(5,'Auxiliar','Auxiliares');
+(5,'Auxiliar','Auxiliares'),
+(6,'Demonstracao','Usuario de demonstracao');
 /*!40000 ALTER TABLE `grupo` ENABLE KEYS */;
 UNLOCK TABLES;
 
