@@ -26,7 +26,7 @@
 			always-use-default-target="true" />
 			
 		<intercept-url pattern="/Home.xhtml" access="isAuthenticated()" />
-		<intercept-url pattern="/relatorio/**"  access="hasAnyRole('ADMINISTRADORES')" />
+		<intercept-url pattern="/relatorio/**"  access="hasAnyRole('ADMINISTRADORES', 'DEMONSTRACAO')" />
 		<intercept-url pattern="/pedido/**"  access="hasAnyRole('VENDEDORES', 'AUXILIARES', 'ADMINISTRADORES', 'DEMONSTRACAO')" />
 		<intercept-url pattern="/produto/**" access="hasAnyRole('ADMINISTRADORES', 'DEMONSTRACAO')" />
 		<intercept-url pattern="/cliente/**" access="hasAnyRole('ADMINISTRADORES', 'DEMONSTRACAO')" />
