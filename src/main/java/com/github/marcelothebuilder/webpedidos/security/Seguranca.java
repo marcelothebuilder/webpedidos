@@ -122,7 +122,11 @@ public class Seguranca implements Serializable {
 	}
 
 	public boolean isPermitidoEnviarPorEmail() {
-		return true;
+		return !inAnyRole("DEMONSTRACAO");
+	}
+	
+	public boolean isModoDemonstracao() {
+		return inAnyRole("DEMONSTRACAO");
 	}
 
 }
