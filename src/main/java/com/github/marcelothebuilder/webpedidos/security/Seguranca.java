@@ -112,6 +112,10 @@ public class Seguranca implements Serializable {
 
 		return false;
 	}
+	
+	public boolean isPermitidoSalvarPedido() {
+		return inAnyRole("ADMINISTRADORES");
+	}
 
 	public boolean isPermitidoEmitirPedido() {
 		return inAnyRole("ADMINISTRADORES", "VENDEDORES");
@@ -122,7 +126,11 @@ public class Seguranca implements Serializable {
 	}
 
 	public boolean isPermitidoEnviarPorEmail() {
-		return true;
+		return !inAnyRole("DEMONSTRACAO");
+	}
+	
+	public boolean isModoDemonstracao() {
+		return inAnyRole("DEMONSTRACAO");
 	}
 
 }

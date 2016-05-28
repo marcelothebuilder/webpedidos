@@ -93,7 +93,7 @@
 				id="dlgConfirmacaoExclusao">
 				<p:button value="Cancelar"
 					onclick="PF('confirm-exclusion').hide(); return false;" />
-				<p:commandButton value="Excluir"
+				<p:commandButton value="Excluir" disabled="#{seguranca.modoDemonstracao}"
 					oncomplete="PF('confirm-exclusion').hide()"
 					action="#{pesquisaProdutoBean.excluir}"
 					update="@form:pesquisaTable" />

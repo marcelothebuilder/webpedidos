@@ -34,7 +34,7 @@
 			<p:toolbar>
 				<p:toolbarGroup align="left">
 					<p:button value="Novo" outcome="/produto/CadastroProduto" />
-					<p:commandButton value="Salvar"
+					<p:commandButton value="Salvar" disabled="#{seguranca.modoDemonstracao}"
 						action="#{cadastroProdutoBean.salvar}" update="@form" />
 				</p:toolbarGroup>
 

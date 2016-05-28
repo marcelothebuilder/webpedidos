@@ -137,7 +137,7 @@
 					onclick="PF('deletaUsuarioDialog').hide(); return false;" />
 				<p:commandButton value="Deletar usuário" type="submit"
 					update="@widgetVar(clientesTable)" process="@this"
-					oncomplete="PF('deletaUsuarioDialog').hide();"
+					oncomplete="PF('deletaUsuarioDialog').hide();" disabled="#{seguranca.modoDemonstracao}"
 					action="#{pesquisaClienteBean.deletaCliente}" />
 			</h:form>
 		</p:confirmDialog>

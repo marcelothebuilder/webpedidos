@@ -97,7 +97,7 @@
 
 				<p:button value="Cancelar"
 					onclick="PF('editaCategoria').hide(); return false;" />
-				<p:commandButton value="Salvar" process="@form"
+				<p:commandButton value="Salvar" process="@form" disabled="#{seguranca.modoDemonstracao}"
 					oncomplete="PF('editaCategoria').hide()"
 					action="#{gerenciaCategoriaBean.salvarCategoria}"
 					update="@widgetVar(tree)">
@@ -115,7 +115,7 @@
 			<h:form>
 				<p:button value="Cancelar"
 					onclick="PF('deletaCategoria').hide(); return false;" />
-				<p:commandButton value="Excluir"
+				<p:commandButton value="Excluir"  disabled="#{seguranca.modoDemonstracao}"
 					action="#{gerenciaCategoriaBean.excluirCategoria}"
 					oncomplete="PF('deletaCategoria').hide()" update="@widgetVar(tree)" />
 			</h:form>

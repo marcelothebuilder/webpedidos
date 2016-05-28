@@ -11,7 +11,7 @@
 		<p:toolbarGroup align="left">
 			<p:button value="Novo" outcome="/pedido/CadastroPedido" />
 			<p:commandButton value="Salvar" action="#{cadastroPedidoBean.salvar}"
-				disabled="#{cadastroPedidoBean.pedido.naoAlteravel}" />
+				disabled="#{cadastroPedidoBean.pedido.naoAlteravel or not seguranca.permitidoSalvarPedido}" />
 		</p:toolbarGroup>
 
 		<p:toolbarGroup align="right">
