@@ -28,10 +28,10 @@
 		<intercept-url pattern="/Home.xhtml" access="isAuthenticated()" />
 		<intercept-url pattern="/relatorio/**"  access="hasAnyRole('ADMINISTRADORES')" />
 		<intercept-url pattern="/pedido/**"  access="hasAnyRole('VENDEDORES', 'AUXILIARES', 'ADMINISTRADORES')" />
-		<intercept-url pattern="/produto/**" access="hasAnyRole('ADMINISTRADORES')" />
-		<intercept-url pattern="/cliente/**" access="hasAnyRole('ADMINISTRADORES')" />
-		<intercept-url pattern="/produto/**" access="hasAnyRole('ADMINISTRADORES')" />
-		<intercept-url pattern="/usuario/**" access="hasAnyRole('ADMINISTRADORES')" />
+		<intercept-url pattern="/produto/**" access="hasAnyRole('ADMINISTRADORES', 'DEMONSTRACAO')" />
+		<intercept-url pattern="/cliente/**" access="hasAnyRole('ADMINISTRADORES', 'DEMONSTRACAO')" />
+		<intercept-url pattern="/produto/**" access="hasAnyRole('ADMINISTRADORES', 'DEMONSTRACAO')" />
+		<intercept-url pattern="/usuario/**" access="hasAnyRole('ADMINISTRADORES', 'DEMONSTRACAO')" />
 		<intercept-url pattern="/**" access="denyAll" />
 
 		<logout logout-url="/Logout" invalidate-session="true" />
