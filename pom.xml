@@ -197,6 +197,13 @@
 		    <artifactId>javassist</artifactId>
 		    <version>3.18.1-GA</version>
 		</dependency>
+		
+		<!-- C3P0 - Pool de conexões -->
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.5.2</version>
+		</dependency>
 	</dependencies>
 
 	<repositories>
