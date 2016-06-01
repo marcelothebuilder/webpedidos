@@ -55,3 +55,5 @@ nb-configuration.xml
 target
 .settings/*
 !.settings/.jsdtscope
+.openshift/
+
