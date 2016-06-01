@@ -19,7 +19,6 @@ Servers/*
 target/
 # project specific - ignored for security reasons, users should rename provided *.example files
 src/main/resources/mail.properties
-src/main/resources/META-INF/persistence.xml
 ########## NetBeans specific #
 nbproject/private/
 build/
