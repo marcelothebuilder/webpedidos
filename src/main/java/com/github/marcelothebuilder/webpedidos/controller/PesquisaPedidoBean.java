@@ -81,13 +81,11 @@ public class PesquisaPedidoBean implements Serializable {
 	 * Aplica o filtro de pedidos nos pedidos retornados.
 	 */
 	public void pesquisar() {
-		System.out.println("PesquisaPBean#pesquisar");
 		String message = "Filtrando pedidos.";
 		FacesMessage fMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, message, message);
 		FacesContext.getCurrentInstance().addMessage(null, fMessage);
 
 		pedidosFiltrados = pedidos.filtrados(filtro);
-		System.out.println("PesquisaPBean#pesquisar#");
 	}
 
 }

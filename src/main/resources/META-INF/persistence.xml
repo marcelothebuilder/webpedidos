@@ -8,7 +8,7 @@
 		<non-jta-data-source>java:comp/env/jdbc/MySQLDS</non-jta-data-source>
 
 		<properties>
-			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.format_sql" value="false" />
 
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />

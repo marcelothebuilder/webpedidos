@@ -10,11 +10,16 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 @ApplicationScoped
 public class EntityManagerProducer implements Serializable {
 	private static final long serialVersionUID = -4626099643783264680L;
 
 	private @Inject EntityManagerFactory factory;
+	
+	private static Log log = LogFactory.getLog(EntityManagerProducer.class);
 
 	public EntityManagerProducer() {
 	}
@@ -22,12 +27,12 @@ public class EntityManagerProducer implements Serializable {
 	@Produces
 	@RequestScoped
 	public EntityManager createEntityManager() {
-		System.out.println("-> starting entity manager");
+		log.info("-> starting entity manager");
 		return factory.createEntityManager();
 	}
 
 	public void closeEntityManager(@Disposes EntityManager manager) {
-		System.out.println("-> closing entity manager");
+		log.info("-> closing entity manager");
 		manager.close();
 	}
 }

@@ -45,7 +45,6 @@ public class GerenciaCategoriaBean implements Serializable {
 	public TreeNode getRaiz() {
 		// inicia a árvore
 		if (raiz == null) {
-			System.out.println("called getRaiz");
 			raiz = new DefaultTreeNode("Raiz", null);
 			List<Categoria> raizes = categorias.raizes();
 			preencheSubCategorias(raizes, raiz);

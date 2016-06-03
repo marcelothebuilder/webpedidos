@@ -7,13 +7,18 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * @author Marcelo Paixao Resende
  *
  */
 @WebListener
 public class AppContextListener implements ServletContextListener {
-
+	
+	private static Log log = LogFactory.getLog(AppContextListener.class);
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -23,8 +28,7 @@ public class AppContextListener implements ServletContextListener {
 	 */
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		System.out.println("contextInitialized");
-
+		log.debug("contextInitialized");
 	}
 
 	/*
@@ -35,7 +39,7 @@ public class AppContextListener implements ServletContextListener {
 	 */
 	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
-		System.out.println("contextDestroyed");
+		log.debug("contextDestroyed");
 	}
 
 }

@@ -22,6 +22,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.util.UrlUtils;
@@ -35,6 +37,8 @@ public class JsfAccessDeniedHandler implements AccessDeniedHandler {
 
 	private String loginPath;
 	private boolean contextRelative;
+	
+	private static Log log = LogFactory.getLog(JsfAccessDeniedHandler.class);
 
 	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response,
@@ -43,7 +47,7 @@ public class JsfAccessDeniedHandler implements AccessDeniedHandler {
 		String redirectUrl = calculateRedirectUrl(request.getContextPath(), loginPath);
 		redirectUrl = response.encodeRedirectURL(redirectUrl);
 
-		System.out.println("Access denied to " + redirectUrl);
+		log.info("Access denied to page " + redirectUrl);
 
 		// we should redirect using ajax response if the case warrants
 		boolean ajaxRedirect = request.getHeader("faces-request") != null
