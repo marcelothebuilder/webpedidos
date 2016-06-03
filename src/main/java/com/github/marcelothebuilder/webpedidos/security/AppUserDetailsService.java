@@ -33,7 +33,7 @@ public class AppUserDetailsService implements UserDetailsService {
 		User user = null;
 
 		if (usuario == null) {
-			throw new UsernameNotFoundException("Not found");
+			throw new UsernameNotFoundException("Username "+email+" is not a registered user.");
 		}
 
 		user = new UsuarioSistema(usuario, getGrupos(usuario));
