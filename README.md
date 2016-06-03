@@ -3,6 +3,8 @@
 
 Sistema de gerenciamento de pedidos de vendas acessível via web. Desenvolvido com tecnologias Java: JSF, PrimeFaces, JPA (Hibernate), Spring Security, Java Mail, Apache Velocity e log4j. Planejado para uso com banco de dados MySQL.
 
+![alt text](https://raw.githubusercontent.com/marcelothebuilder/webpedidos/master/extra/docs/app_home.png "Imagem de demonstração do sistema")
+
 ## O que faz?
 
 Cadastra produtos com código, usuários, clientes, endereços, endereços de entrega, vendedores, categorias. Também emite pedidos por e-mail, mantém estados dos pedidos e gerencia permissões de acesso.
