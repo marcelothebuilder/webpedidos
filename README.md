@@ -11,6 +11,12 @@ Cadastra produtos com código, usuários, clientes, endereços, endereços de en
 
 Não recebe pagamentos e não permite acesso direto do cliente.
 
+## Demonstração
+
+Uma demonstração do sistema pode ser conferida online no link <http://webpedidos-marcelobuilder.rhcloud.com>.
+
+A demonstração está hospedada em um servidor gratuito, oferecido pela RedHat, e entra em modo "hibernação" quando não existe tráfego. **Se a página demorar a carregar, por favor aguarde até que o serviço seja iniciado**, não demora mais que alguns segundos.
+
 ## Instalação
 
 * Clone o repositório para a sua máquina.
