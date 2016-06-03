@@ -3,6 +3,8 @@
 
 Sistema de gerenciamento de pedidos de vendas acessível via web. Desenvolvido com tecnologias Java: JSF, PrimeFaces, JPA (Hibernate), Spring Security, Java Mail, Apache Velocity e log4j. Planejado para uso com banco de dados MySQL.
 
+![alt text](https://raw.githubusercontent.com/marcelothebuilder/webpedidos/master/extra/docs/app_home.png "Imagem de demonstração do sistema")
+
 ## O que faz?
 
 Cadastra produtos com código, usuários, clientes, endereços, endereços de entrega, vendedores, categorias. Também emite pedidos por e-mail, mantém estados dos pedidos e gerencia permissões de acesso.
@@ -10,6 +12,17 @@ Cadastra produtos com código, usuários, clientes, endereços, endereços de en
 ## O que não faz?
 
 Não recebe pagamentos e não permite acesso direto do cliente.
+
+## Demonstração
+
+Uma demonstração do sistema pode ser conferida online no link <http://webpedidos-marcelobuilder.rhcloud.com>. Você pode usar as credenciais abaixo para entrar no sistema, mas não poderá alterar os dados.
+
+```
+Usuário: demo@demo.com
+Senha: demonstracao
+```
+
+A demonstração está hospedada em um servidor gratuito, oferecido pela RedHat, e entra em modo "hibernação" quando não existe tráfego. **Se a página demorar a carregar, por favor aguarde até que o serviço seja iniciado**, não demora mais que alguns segundos.
 
 ## Instalação
 
