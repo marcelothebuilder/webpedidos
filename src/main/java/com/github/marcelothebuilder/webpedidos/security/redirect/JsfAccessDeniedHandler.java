@@ -18,6 +18,7 @@ package com.github.marcelothebuilder.webpedidos.security.redirect;
 
 import java.io.IOException;
 
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +39,7 @@ public class JsfAccessDeniedHandler implements AccessDeniedHandler {
 	private String loginPath;
 	private boolean contextRelative;
 	
-	private static Log log = LogFactory.getLog(JsfAccessDeniedHandler.class);
+	private @Inject Log log;
 
 	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response,

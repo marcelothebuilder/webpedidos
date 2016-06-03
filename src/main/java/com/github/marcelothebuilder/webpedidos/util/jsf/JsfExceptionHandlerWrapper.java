@@ -12,6 +12,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ExceptionQueuedEvent;
 import javax.faces.event.ExceptionQueuedEventContext;
+import javax.inject.Inject;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -20,7 +21,7 @@ import com.github.marcelothebuilder.webpedidos.service.NegocioException;
 
 public class JsfExceptionHandlerWrapper extends ExceptionHandlerWrapper {
 	
-	private static Log log = LogFactory.getLog(JsfExceptionHandlerWrapper.class);
+	private @Inject Log log;
 
 	private ExceptionHandler wrappedExceptionHandler;
 

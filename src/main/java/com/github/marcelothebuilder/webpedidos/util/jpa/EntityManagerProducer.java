@@ -19,7 +19,7 @@ public class EntityManagerProducer implements Serializable {
 
 	private @Inject EntityManagerFactory factory;
 	
-	private static Log log = LogFactory.getLog(EntityManagerProducer.class);
+	private @Inject Log log;
 
 	public EntityManagerProducer() {
 	}

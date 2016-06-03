@@ -3,6 +3,7 @@
  */
 package com.github.marcelothebuilder.webpedidos.util;
 
+import javax.inject.Inject;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
@@ -17,7 +18,7 @@ import org.apache.commons.logging.LogFactory;
 @WebListener
 public class AppContextListener implements ServletContextListener {
 	
-	private static Log log = LogFactory.getLog(AppContextListener.class);
+	private @Inject Log log;
 	
 	/*
 	 * (non-Javadoc)
