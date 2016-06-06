@@ -37,6 +37,14 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Mockito - Mocks para testes com JUnit -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>1.10.19</version>
+			<scope>test</scope>
+		</dependency>
+
 		<!-- JSTL, faltando no Tomcat -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -92,11 +100,11 @@
 			<scope>compile</scope>
 			<exclusions>
 				<!-- Needed to prevent a bug with tomcat<7.0.56 in openshift -->
-                <exclusion>
-                    <groupId>org.javassist</groupId>
-                    <artifactId>javassist</artifactId>
-                </exclusion>
-            </exclusions>
+				<exclusion>
+					<groupId>org.javassist</groupId>
+					<artifactId>javassist</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- Hibernate/JPA EM -->
@@ -188,16 +196,16 @@
 			<artifactId>jasperreports</artifactId>
 			<version>6.2.2</version>
 		</dependency>
-		
+
 		<!-- Javasist -->
-		<!-- We'll ignore hibernate's dependency version and use
-			this older version to prevent a bug with tomcat<7.0.56 -->
+		<!-- We'll ignore hibernate's dependency version and use this older version 
+			to prevent a bug with tomcat<7.0.56 -->
 		<dependency>
-		    <groupId>org.javassist</groupId>
-		    <artifactId>javassist</artifactId>
-		    <version>3.18.1-GA</version>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.18.1-GA</version>
 		</dependency>
-		
+
 		<!-- C3P0 - Pool de conexões -->
 		<dependency>
 			<groupId>com.mchange</groupId>
@@ -218,9 +226,9 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
-		
+
 	</repositories>
-	
+
 	<pluginRepositories>
 		<!-- OpenShift -->
 		<pluginRepository>
@@ -234,7 +242,7 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-	
+
 	<build>
 		<finalName>webpedidos</finalName>
 		<plugins>
