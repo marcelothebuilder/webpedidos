@@ -17,7 +17,7 @@ import com.github.marcelothebuilder.webpedidos.model.usuario.Grupo;
  * @author Marcelo Paixao Resende
  *
  */
-public final class Grupos implements Serializable {
+public class Grupos implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private @Inject EntityManager manager;
