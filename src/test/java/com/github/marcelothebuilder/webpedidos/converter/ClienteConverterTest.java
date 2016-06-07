@@ -1,6 +1,6 @@
 package com.github.marcelothebuilder.webpedidos.converter;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,18 +9,18 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import com.github.marcelothebuilder.webpedidos.model.produto.Categoria;
-import com.github.marcelothebuilder.webpedidos.repository.Categorias;
+import com.github.marcelothebuilder.webpedidos.model.cliente.Cliente;
+import com.github.marcelothebuilder.webpedidos.repository.Clientes;
 
-public class CategoriaConverterTest {
+public class ClienteConverterTest {
 	
 	@Mock
-	private Categorias categorias;
+	private Clientes clientes;
 	
 	@InjectMocks
-	private CategoriaConverter converter;
+	private ClienteConverter converter;
 	
-	private Categoria entitadeEntradaSaida;
+	private Cliente entitadeEntradaSaida;
 	
 	private Long codigoEntradaSaidaNumber;
 	private String codigoEntradaSaidaString;
@@ -32,10 +32,10 @@ public class CategoriaConverterTest {
 		this.codigoEntradaSaidaNumber = 5L;
 		this.codigoEntradaSaidaString = this.codigoEntradaSaidaNumber.toString();
 		
-		this.entitadeEntradaSaida = new Categoria();
+		this.entitadeEntradaSaida = new Cliente();
 		this.entitadeEntradaSaida.setCodigo(this.codigoEntradaSaidaNumber);
 		
-		Mockito.when(categorias.porCodigo(this.codigoEntradaSaidaNumber))
+		Mockito.when(clientes.porCodigo(this.codigoEntradaSaidaNumber))
 			.thenReturn(this.entitadeEntradaSaida);
 	}
 
