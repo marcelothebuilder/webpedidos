@@ -28,10 +28,6 @@ public class Seguranca implements Serializable {
 
 	private @Inject ExternalContext external;
 
-	public Seguranca() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public Usuario getUsuarioLogado() {
 		UsuarioSistema usuarioSistema = getUsuarioSistema();
 

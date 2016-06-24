@@ -10,9 +10,7 @@ package com.github.marcelothebuilder.webpedidos.util.report;
 public class RelatorioNaoExisteException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
-	public RelatorioNaoExisteException() {
-		// TODO Auto-generated constructor stub
-	}
+	public RelatorioNaoExisteException() {}
 
 	/**
 	 * @param message
