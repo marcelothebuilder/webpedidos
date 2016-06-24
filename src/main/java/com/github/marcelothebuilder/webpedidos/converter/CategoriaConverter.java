@@ -24,6 +24,6 @@ public class CategoriaConverter extends GenericEntityConverter<Categoria> {
 
 	@Override
 	protected String extraiChave(Categoria objeto) {
-		return objeto.getCodigo().toString();
+		return ConverterUtils.getCodigoComoString(objeto.getCodigo());
 	}
 }

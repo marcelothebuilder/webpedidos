@@ -22,7 +22,7 @@ public class PedidoConverter extends GenericEntityConverter<Pedido> {
 
 	@Override
 	protected String extraiChave(Pedido objeto) {
-		return objeto.getCodigo().toString();
+		return ConverterUtils.getCodigoComoString(objeto.getCodigo());
 	}
 
 }

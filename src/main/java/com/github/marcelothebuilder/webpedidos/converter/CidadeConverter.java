@@ -29,6 +29,6 @@ public class CidadeConverter extends GenericEntityConverter<Cidade> {
 
 	@Override
 	protected String extraiChave(Cidade objeto) {
-		return objeto.getCodigo().toString();
+		return ConverterUtils.getCodigoComoString(objeto.getCodigo());
 	}
 }

@@ -26,7 +26,7 @@ public class EstadoConverter extends GenericEntityConverter<Estado> {
 
 	@Override
 	protected String extraiChave(Estado objeto) {
-		return objeto.getCodigo().toString();
+		return ConverterUtils.getCodigoComoString(objeto.getCodigo());
 	}
 
 }

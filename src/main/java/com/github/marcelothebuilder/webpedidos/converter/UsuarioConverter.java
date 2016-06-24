@@ -22,7 +22,7 @@ public class UsuarioConverter extends GenericEntityConverter<Usuario> {
 
 	@Override
 	protected String extraiChave(Usuario objeto) {
-		return objeto.getCodigo().toString();
+		return ConverterUtils.getCodigoComoString(objeto.getCodigo());
 	}
 
 
