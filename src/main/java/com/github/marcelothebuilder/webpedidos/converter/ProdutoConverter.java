@@ -22,7 +22,7 @@ public class ProdutoConverter extends GenericEntityConverter<Produto> {
 
 	@Override
 	protected String extraiChave(Produto objeto) {
-		return objeto.getCodigo().toString();
+		return ConverterUtils.getCodigoComoString(objeto.getCodigo());
 	}
 
 }

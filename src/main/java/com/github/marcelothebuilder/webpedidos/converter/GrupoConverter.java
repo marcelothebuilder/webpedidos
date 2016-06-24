@@ -22,7 +22,7 @@ public class GrupoConverter extends GenericEntityConverter<Grupo> {
 
 	@Override
 	protected String extraiChave(Grupo objeto) {
-		return objeto.getCodigo().toString();
+		return ConverterUtils.getCodigoComoString(objeto.getCodigo());
 	}
 	
 	

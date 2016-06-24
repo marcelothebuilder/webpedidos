@@ -22,7 +22,7 @@ public class ClienteConverter extends GenericEntityConverter<Cliente> {
 
 	@Override
 	protected String extraiChave(Cliente objeto) {
-		return objeto.getCodigo().toString();
+		return ConverterUtils.getCodigoComoString(objeto.getCodigo());
 	}
 
 }
