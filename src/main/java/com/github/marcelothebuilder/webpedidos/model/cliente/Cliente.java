@@ -15,6 +15,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.github.marcelothebuilder.webpedidos.model.endereco.Endereco;
 
@@ -50,6 +53,7 @@ public class Cliente implements Serializable {
 		this.endereco = endereco;
 	}
 
+	@NotBlank
 	@Column(nullable = false, length = 255)
 	public String getNome() {
 		return nome;
@@ -59,6 +63,7 @@ public class Cliente implements Serializable {
 		this.nome = nome;
 	}
 
+	@NotBlank
 	@Column(nullable = false, length = 255)
 	public String getEmail() {
 		return email;
@@ -67,7 +72,8 @@ public class Cliente implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
+	@NotBlank
 	@Column(nullable = false, length = 14, name = "doc_receita_federal")
 	public String getDocumentoReceitaFederal() {
 		return documentoReceitaFederal;
@@ -77,6 +83,7 @@ public class Cliente implements Serializable {
 		this.documentoReceitaFederal = documentoReceitaFederal;
 	}
 
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 10, name = "tipo_pessoa")
 	public TipoPessoa getTipoPessoa() {
