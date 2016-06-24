@@ -48,4 +48,15 @@ public class ClienteConverterTest {
 	public void testGetAsString() {
 		assertEquals(codigoEntradaSaidaString, converter.getAsString(null, null, entitadeEntradaSaida));
 	}
+	
+	@Test
+	public void deveRetornarStringVaziaQuandoCodigoForNulo() {
+		Cliente clienteSemCodigo = new Cliente();
+		clienteSemCodigo.setCodigo(null);
+		
+		String actual = converter.getAsString(null, null, clienteSemCodigo);
+		String expected = "";
+		
+		assertEquals("Deve retornar uma string nula", expected, actual);
+	}
 }
