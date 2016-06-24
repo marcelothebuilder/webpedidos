@@ -15,8 +15,6 @@ import javax.faces.event.ExceptionQueuedEventContext;
 import javax.inject.Inject;
 
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.github.marcelothebuilder.webpedidos.service.NegocioException;
 
 public class JsfExceptionHandlerWrapper extends ExceptionHandlerWrapper {
