@@ -194,7 +194,7 @@
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
-			<version>6.2.2</version>
+			<version>6.16.0</version>
 		</dependency>
 
 		<!-- Javasist -->
