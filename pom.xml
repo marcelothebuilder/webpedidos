@@ -203,7 +203,7 @@
 		<dependency>
 			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
-			<version>3.18.1-GA</version>
+			<version>3.28.0-GA</version>
 		</dependency>
 
 		<!-- C3P0 - Pool de conexões -->
